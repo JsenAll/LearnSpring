@@ -30,6 +30,7 @@ public class ConnectionUtils {
                 tl.set(conn);
             }
             //4.返回当前线程上的连接
+            System.out.println(conn);
             return conn;
         }catch (Exception e){
             throw new RuntimeException(e);
@@ -42,4 +43,5 @@ public class ConnectionUtils {
     public void removeConnection(){
         tl.remove();
     }
+
 }

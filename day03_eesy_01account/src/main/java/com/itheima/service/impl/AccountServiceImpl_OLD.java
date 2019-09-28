@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 使用事务
  */
-public class AccountServiceImpl_OLD implements IAccountService {
+public class AccountServiceImpl_OLD implements IAccountService{
 
     private IAccountDao accountDao;
     private TransactionManager txManager;
@@ -34,11 +34,11 @@ public class AccountServiceImpl_OLD implements IAccountService {
             txManager.commit();
             //4.返回结果
             return accounts;
-        } catch (Exception e) {
+        }catch (Exception e){
             //5.回滚操作
             txManager.rollback();
             throw new RuntimeException(e);
-        } finally {
+        }finally {
             //6.释放连接
             txManager.release();
         }
@@ -56,11 +56,11 @@ public class AccountServiceImpl_OLD implements IAccountService {
             txManager.commit();
             //4.返回结果
             return account;
-        } catch (Exception e) {
+        }catch (Exception e){
             //5.回滚操作
             txManager.rollback();
             throw new RuntimeException(e);
-        } finally {
+        }finally {
             //6.释放连接
             txManager.release();
         }
@@ -75,10 +75,10 @@ public class AccountServiceImpl_OLD implements IAccountService {
             accountDao.saveAccount(account);
             //3.提交事务
             txManager.commit();
-        } catch (Exception e) {
+        }catch (Exception e){
             //4.回滚操作
             txManager.rollback();
-        } finally {
+        }finally {
             //5.释放连接
             txManager.release();
         }
@@ -94,10 +94,10 @@ public class AccountServiceImpl_OLD implements IAccountService {
             accountDao.updateAccount(account);
             //3.提交事务
             txManager.commit();
-        } catch (Exception e) {
+        }catch (Exception e){
             //4.回滚操作
             txManager.rollback();
-        } finally {
+        }finally {
             //5.释放连接
             txManager.release();
         }
@@ -113,10 +113,11 @@ public class AccountServiceImpl_OLD implements IAccountService {
             accountDao.deleteAccount(acccountId);
             //3.提交事务
             txManager.commit();
-        } catch (Exception e) {
+        }catch (Exception e){
             //4.回滚操作
             txManager.rollback();
-        } finally {
+            throw new RuntimeException(e);
+        }finally {
             //5.释放连接
             txManager.release();
         }
@@ -135,29 +136,28 @@ public class AccountServiceImpl_OLD implements IAccountService {
             //2.2根据名称查询转入账户
             Account target = accountDao.findAccountByName(targetName);
             //2.3转出账户减钱
-            source.setMoney(source.getMoney() - money);
+            source.setMoney(source.getMoney()-money);
             //2.4转入账户加钱
-            target.setMoney(target.getMoney() + money);
+            target.setMoney(target.getMoney()+money);
             //2.5更新转出账户
             accountDao.updateAccount(source);
 
-//            int i=1/0;
+            int i=1/0;
 
             //2.6更新转入账户
             accountDao.updateAccount(target);
             //3.提交事务
             txManager.commit();
 
-        } catch (Exception e) {
+        }catch (Exception e){
             //4.回滚操作
             txManager.rollback();
             e.printStackTrace();
-        } finally {
+        }finally {
             //5.释放连接
             txManager.release();
         }
 
+
     }
-
-
 }

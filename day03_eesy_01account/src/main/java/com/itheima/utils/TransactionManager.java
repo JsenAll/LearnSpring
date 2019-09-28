@@ -4,6 +4,7 @@ package com.itheima.utils;
  * 和事务管理相关的工具类，它包含了，开启事务，提交事务，回滚事务和释放连接
  */
 public class TransactionManager {
+
     private ConnectionUtils connectionUtils;
 
     public void setConnectionUtils(ConnectionUtils connectionUtils) {
@@ -13,13 +14,14 @@ public class TransactionManager {
     /**
      * 开启事务
      */
-    public void beginTransaction() {
+    public  void beginTransaction(){
         try {
             connectionUtils.getThreadConnection().setAutoCommit(false);
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
+
     /**
      * 提交事务
      */
@@ -36,11 +38,16 @@ public class TransactionManager {
      */
     public  void rollback(){
         try {
+
             connectionUtils.getThreadConnection().rollback();
+            System.out.println("回滚操作--成功"
+            );
         }catch (Exception e){
+            System.out.println("回滚失败");
             e.printStackTrace();
         }
     }
+
 
     /**
      * 释放连接
@@ -53,7 +60,5 @@ public class TransactionManager {
             e.printStackTrace();
         }
     }
-
-
-
 }
+
