@@ -1,0 +1,21 @@
+搭建一个小的spring  使用xml配置的方式  巩固前面学习的
+使用纯注解的形式
+  拿掉 扫描包的xml代码
+   <context:component-scan base-package="com.itheima"></context:component-scan>
+   替换成注解
+
+   第一步:创建一个配置类---SpringConfiguration
+           配置类中有两个方法:创建一个QueryRunner对象和创建一个 创建数据源 DataSource 对象
+
+   第二步:获取容器要给改为获取注解的配置类
+           AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+
+   什么时候用注解?什么时候用xml?
+   自己写的类使用注解更简单  调用别人写的类使用xml配置更简单  没有唯一答案!
+
+   优化jdbc的配置 不写死 看 OptimizeJdbcConfig 将jdbc的需要的参数写到jdbcConfig.properties文件中,这样以后修改数据库的链接则不需要改动代码
+   只需修改jdbcConfig.properties这个文件
+
+
+
+   AccountServiceTest Spring整合Junit
