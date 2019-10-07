@@ -7,8 +7,7 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!-- 配置srping的Ioc,把service对象配置进来-->
-    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+
     <!--spring中基于XML的AOP配置步骤
             1、把通知Bean也交给spring来管理
             2、使用aop:config标签表明开始AOP的配置
@@ -50,13 +49,21 @@
                         切到业务层实现类下的所有方法
                             * com.itheima.service.impl.*.*(..)
         -->
-
+    <!-- 配置srping的Ioc,把service对象配置进来-->
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
     <!-- 配置Logger类 -->
     <bean id="logger" class="com.itheima.utils.Logger"></bean>
-
+    <!--使用aop:config标签表明开始AOP的配置-->
     <aop:config>
+        <!--使用aop:aspect标签表明配置切面
+               id属性：是给切面提供一个唯一标识
+               ref属性：是指定通知类bean的Id。-->
         <aop:aspect id="logAdvice" ref="logger">
-            <aop:before method="printLog" pointcut="execution(public void com.itheima.service.impl.AccountServiceImpl.saveAccount())"></aop:before>
+            <!--aop:before：表示配置前置通知
+                    method属性：用于指定Logger类中哪个方法是前置通知
+                    pointcut属性：用于指定切入点表达式，该表达式的含义指的是对业务层中哪些方法增强-->
+            <aop:before method="printLog"
+                        pointcut="execution(public void com.itheima.service.impl.AccountServiceImpl.saveAccount())"></aop:before>
 
         </aop:aspect>
     </aop:config>
