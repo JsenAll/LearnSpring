@@ -3,3 +3,5 @@
 	JdbcTemplate的作用：它就是用于和数据库交互的，实现对表的CRUD操作
 	如何创建该对象：
 	对象中的常用方法：
+
+2,ioc   优化 多个dao实现类的情况可以 继承  JdbcDaoSupport 优缺点
